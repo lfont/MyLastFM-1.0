@@ -1,0 +1,14 @@
+enyo.depends(
+	"css/MyLastFM.css",
+	"$enyo-lib/systemui/",
+	"source/lastFM/",
+	"source/Scrim.js",
+	"source/Preferences.js",
+	"source/Map.js",
+	"source/Detail.js",
+	"source/Event.js",
+	"source/ArtistEvents.js",
+	"source/ArtistSearch.js",
+	"source/GeoEventsSearch.js",
+	"source/MyLastFM.js"
+);

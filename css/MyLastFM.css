@@ -1,0 +1,9 @@
+.image,
+.label {
+    margin-left: 1em;
+    margin-top: 0.2em;
+}
+
+.about {
+    height: 120px;
+}

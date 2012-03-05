@@ -1,0 +1,10 @@
+{
+	"id": "org.lfont.mylastfm",
+	"version": "1.0.0",
+	"vendor": "Loïc Fontaine",
+	"type": "web",
+	"main": "index.html",
+	"title": "MyLastFM",
+	"uiRevision": "2",
+    "icon": "icon.png"
+}

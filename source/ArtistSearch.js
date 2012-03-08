@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "App.ArtistSearch",
+    name: "MyLastFM.ArtistSearch",
     kind: "enyo.VFlexBox",
     events: {
         onBack: ""
@@ -9,15 +9,15 @@ enyo.kind({
             components: [
                 { name: "search", className: "enyo-bg", layoutKind: "VFlexLayout",
                     components: [
-                        { name: "scrim", kind: "App.Scrim" },
-                        { name: "getArtist", kind: "App.LastFM.ArtistInfo",
+                        { name: "scrim", kind: "MyLastFM.Scrim" },
+                        { name: "getArtist", kind: "MyLastFM.LastFM.ArtistInfo",
                             onData: "gotArtist", onNoData: "noArtist" },
                         { kind: "enyo.PageHeader",
                             components: [
                                 { name: "backButton", kind: "enyo.Button", content: "Back",
                                     onclick: "backClicked" },
                                 { name: "headerText", layoutKind: "HFlexLayout", pack: "center",
-                                    content: "MyLastFM - Artist Search", flex: 1 }
+                                    content: "Artist Search", flex: 1 }
                             ]
                         },
                         { kind: "enyo.RowGroup", caption: "Artist Name",
@@ -79,9 +79,9 @@ enyo.kind({
                         }
                     ]
                 },
-                { name: "detail", kind: "App.Detail", className: "enyo-bg", lazy: true,
+                { name: "detail", kind: "MyLastFM.Detail", className: "enyo-bg", lazy: true,
                     onBack: "goBack" },
-                { name: "events", kind: "App.ArtistEvents", className: "enyo-bg", lazy: true,
+                { name: "events", kind: "MyLastFM.ArtistEvents", className: "enyo-bg", lazy: true,
                     onBack: "goBack" }
             ]
         }
@@ -112,19 +112,19 @@ enyo.kind({
                 this.$.similar.addClass("enyo-last");
             }
 
-            this.$.similarImage.setSrc(App.LastFM.GetDataService.getImageURI(
+            this.$.similarImage.setSrc(MyLastFM.LastFM.JSONService.getImageURI(
                                                                 similar.image, "small"));
             this.$.similarName.setContent(similar.name);
             return true;
         }
     },
     similarClicked: function (inSender, inEvent) {
-        this.$.detail.setUrl(this.artist.similar.artist[inEvent.rowIndex].url);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(this.artist.similar.artist[inEvent.rowIndex].url);
     },
     setupTagRow: function (inSender, inIndex) {
         var tags,
-                tag;
+            tag;
 
         if (!this.artist) return;
 
@@ -142,8 +142,8 @@ enyo.kind({
         }
     },
     tagClicked: function (inSender, inEvent) {
-        this.$.detail.setUrl(this.artist.tags.tag[inEvent.rowIndex].url);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(this.artist.tags.tag[inEvent.rowIndex].url);
     },
     gotArtist: function (inSender, inArtist) {
         this.artist = inArtist;
@@ -167,15 +167,15 @@ enyo.kind({
         this.doBack();
     },
     artistClicked: function (inSender, inEvent) {
-        this.$.detail.setUrl(this.artist.url);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(this.artist.url);
     },
     getArtistEventsClicked: function (inSender, inEvent) {
-        this.$.events.setArtistName(this.artist.name);
         this.$.pane.selectViewByName("events");
+        this.$.events.setArtistName(this.artist.name);
     },
     artistBioLinkClicked: function (inSender, inURL) {
-        this.$.detail.setUrl(inURL);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(inURL);
     }
 });

@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "App.ArtistEvents",
+    name: "MyLastFM.ArtistEvents",
     kind: "enyo.VFlexBox",
     events: {
         onBack: ""
@@ -12,8 +12,8 @@ enyo.kind({
             components: [
                 { name: "search", className: "enyo-bg", layoutKind: "VFlexLayout",
                     components: [
-                        { name: "scrim", kind: "App.Scrim" },
-                        { name: "getArtistEvents", kind: "App.LastFM.ArtistEvents",
+                        { name: "scrim", kind: "MyLastFM.Scrim" },
+                        { name: "getArtistEvents", kind: "MyLastFM.LastFM.ArtistEvents",
                             onData: "gotArtistEvents", onNoData: "noArtistEvents" },
                         { kind: "enyo.PageHeader",
                             components: [
@@ -45,9 +45,9 @@ enyo.kind({
                         }
                     ]
                 },
-                { name: "detail", kind: "App.Detail", className: "enyo-bg", lazy: true,
+                { name: "detail", kind: "MyLastFM.Detail", className: "enyo-bg", lazy: true,
                     onBack: "goBack" },
-                { name: "artistEvent", kind: "App.Event", className: "enyo-bg", lazy: true,
+                { name: "artistEvent", kind: "MyLastFM.Event", className: "enyo-bg", lazy: true,
                     onBack: "goBack", onLinkClick: "linkClicked" }
             ]
         }
@@ -67,7 +67,7 @@ enyo.kind({
     artistNameChanged: function (inPreviousArtistName) {
         this.$.pane.selectViewByName("search");
         if (inPreviousArtistName !== this.artistName) {
-            this.$.headerText.setContent("MyLastFM - " + this.artistName + "'s Events");
+            this.$.headerText.setContent(this.artistName + "'s Events");
             this.$.getArtistEvents.search(this.artistName);
             this.artistEvents = {};
             this.page = 1;
@@ -95,8 +95,8 @@ enyo.kind({
         e = this.artistEvents.events[inIndex];
 
         if (e) {
-            imageURI = App.LastFM.GetDataService.getImageURI(e.venue.image, "medium") ||
-                App.LastFM.GetDataService.getImageURI(e.image, "medium");
+            imageURI = MyLastFM.LastFM.JSONService.getImageURI(e.venue.image, "medium") ||
+                MyLastFM.LastFM.JSONService.getImageURI(e.image, "medium");
             this.$.venueImage.setSrc(imageURI);
             this.$.venueName.setContent(e.venue.name);
             this.$.startDate.setContent(e.startDate);
@@ -112,14 +112,14 @@ enyo.kind({
         var e = this.artistEvents.events[inEvent.rowIndex];
 
         if (e) {
-            this.$.artistEvent.setEventItem(e);
             this.$.pane.selectViewByName("artistEvent");
+            this.$.artistEvent.setEventItem(e);
         } else {
             this.$.getArtistEvents.search(this.artistName, this.page);
         }
     },
     linkClicked: function (inSender, inUrl) {
-        this.$.detail.setUrl(inUrl);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(inUrl);
     }
 });

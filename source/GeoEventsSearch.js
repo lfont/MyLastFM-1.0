@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "App.GeoEventsSearch",
+    name: "MyLastFM.GeoEventsSearch",
     kind: "enyo.VFlexBox",
     events: {
         onBack: ""
@@ -25,15 +25,15 @@ enyo.kind({
                             onSuccess: "gotRevLocation",
                             onFailure: "revLocationFailure"
                         },
-                        { name: "scrim", kind: "App.Scrim" },
-                        { name: "getGeoEvents", kind: "App.LastFM.GeoEvents",
+                        { name: "scrim", kind: "MyLastFM.Scrim" },
+                        { name: "getGeoEvents", kind: "MyLastFM.LastFM.GeoEvents",
                             onData: "gotGeoEvents", onNoData: "noGeoEvents" },
                         { kind: "enyo.PageHeader",
                             components: [
                                 { name: "backButton", kind: "enyo.Button", content: "Back",
                                     onclick: "backClicked" },
                                 { name: "headerText", layoutKind: "HFlexLayout", pack: "center",
-                                    content: "MyLastFM - Events", flex: 1 },
+                                    content: "Events", flex: 1 },
                                 { name: "locationButton", kind: "enyo.Button", content: "Location",
                                     onclick: "locationButtonClicked" }
                             ]
@@ -72,9 +72,9 @@ enyo.kind({
                         }
                     ]
                 },
-                { name: "detail", kind: "App.Detail", className: "enyo-bg", lazy: true,
+                { name: "detail", kind: "MyLastFM.Detail", className: "enyo-bg", lazy: true,
                     onBack: "goBack" },
-                { name: "geoEvent", kind: "App.Event", className: "enyo-bg", lazy: true,
+                { name: "geoEvent", kind: "MyLastFM.Event", className: "enyo-bg", lazy: true,
                     onBack: "goBack", onLinkClick: "linkClicked" }
             ]
         }
@@ -86,10 +86,10 @@ enyo.kind({
         this.$.pane.selectViewByName("search");
     },
     showingChanged: function () {
-        if (!App.preferences) return;
+        if (!MyLastFM.preferences) return;
 
         if (this.$.location.getValue() === "") {
-            this.$.location.setValue(App.preferences.defaultLocation);
+            this.$.location.setValue(MyLastFM.preferences.defaultLocation);
         }
     },
     goBack: function (inSender, inEvent) {
@@ -152,8 +152,8 @@ enyo.kind({
         e = this.geoEvents.events[inIndex];
 
         if (e) {
-            imageURI = App.LastFM.GetDataService.getImageURI(e.venue.image, "medium") ||
-                App.LastFM.GetDataService.getImageURI(e.image, "medium");
+            imageURI = MyLastFM.LastFM.JSONService.getImageURI(e.venue.image, "medium") ||
+                MyLastFM.LastFM.JSONService.getImageURI(e.image, "medium");
             this.$.venueImage.setSrc(imageURI);
             this.$.artist.setContent(e.artists.headliner);
             this.$.venueName.setContent(e.venue.name);
@@ -170,14 +170,14 @@ enyo.kind({
         var e = this.geoEvents.events[inEvent.rowIndex];
 
         if (e) {
-            this.$.geoEvent.setEventItem(e);
             this.$.pane.selectViewByName("geoEvent");
+            this.$.geoEvent.setEventItem(e);
         } else {
             this.$.getGeoEvents.search(this.geoEvents.location, this.page);
         }
     },
     linkClicked: function (inSender, inUrl) {
-        this.$.detail.setUrl(inUrl);
         this.$.pane.selectViewByName("detail");
+        this.$.detail.setUrl(inUrl);
     }
 });

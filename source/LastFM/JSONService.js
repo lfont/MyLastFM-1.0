@@ -1,6 +1,6 @@
 enyo.kind({
-    name: "App.LastFM.GetDataService",
-    kind: enyo.WebService,
+    name: "MyLastFM.LastFM.JSONService",
+    kind: "enyo.WebService",
     published: {
         apiKey: "b25b959554ed76058ac220b7b2e0a026",
         methodName: ""
@@ -36,7 +36,7 @@ enyo.kind({
         this.updateUrl();
     },
     updateUrl: function () {
-        this.setUrl(enyo.macroize(App.LastFM.GetDataService.url, {
+        this.setUrl(enyo.macroize(MyLastFM.LastFM.JSONService.url, {
             apiKey: this.apiKey,
             method: this.methodName
         }));

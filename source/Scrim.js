@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "App.Scrim",
+    name: "MyLastFM.Scrim",
     kind: enyo.Control,
     components: [
         { kind: enyo.Scrim, layoutKind: "VFlexLayout", align: "center", pack: "center",

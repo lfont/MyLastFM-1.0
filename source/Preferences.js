@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "App.Preferences",
+    name: "MyLastFM.Preferences",
     kind: enyo.VFlexBox,
     events: {
             onReceive: "",

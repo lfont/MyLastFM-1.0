@@ -1,5 +1,5 @@
 enyo.depends(
-	"GetDataService.js",
+	"JSONService.js",
 	"ArtistInfo.js",
 	"ArtistEvents.js",
 	"GeoEvents.js"

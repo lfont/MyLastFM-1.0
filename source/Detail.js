@@ -1,6 +1,6 @@
 enyo.kind({
-    name: "App.Detail",
-    kind: enyo.VFlexBox,
+    name: "MyLastFM.Detail",
+    kind: "enyo.VFlexBox",
     events: {
         onBack: ""
     },
@@ -8,18 +8,18 @@ enyo.kind({
         url: ""
     },
     components: [
-        { kind: enyo.PageHeader,
+        { kind: "enyo.PageHeader",
             components: [
-                { name: "backButton", kind: enyo.Button, content: "Back",
+                { name: "backButton", kind: "enyo.Button", content: "Back",
                     onclick: "backClicked" },
                 { name: "headerText", layoutKind: "HFlexLayout", pack: "center",
-                    content: "MyLastFM - Detail", flex: 1 }
+                    content: "External Page", flex: 1 }
             ]
         },
-        { kind: enyo.Scroller, flex: 1,
+        { kind: "enyo.Scroller", flex: 1,
             components: [
-                // enyo.WebView does not work on webOS 2.2
-                { name: "webView", kind: enyo.Iframe, layoutKind: "HFlexLayout",
+                // FIX: enyo.WebView does not work on webOS 2.2
+                { name: "webView", kind: "enyo.Iframe", layoutKind: "HFlexLayout",
                     onUrlRedirected: "redir",
                     redirects: [
             
@@ -34,7 +34,7 @@ enyo.kind({
         },
         //non visual component to open the browser/email
         {
-            kind: enyo.PalmService,
+            kind: "enyo.PalmService",
             name: "appManager",
             service: "palm://com.palm.applicationManager/",
             method: "open"

@@ -1,12 +1,12 @@
 enyo.kind({
-    name: "App.MyLastFM",
+    name: "MyLastFM.App",
     kind: "enyo.VFlexBox",
     components: [
         { name: "pane", kind: "enyo.Pane", flex: 1,
             components: [
                     { name: "menu", kind: "enyo.VFlexBox", className: "enyo-bg",
                         components: [
-                            { kind: "enyo.PageHeader", content: "MyLastFM", layoutKind: "HFlexLayout", pack: "center" },
+                            { kind: "enyo.PageHeader", content: "Home", layoutKind: "HFlexLayout", pack: "center" },
                             { kind: "enyo.VFlexBox", flex: 1,
                                 components: [
                                     { kind: "enyo.Button", onclick: "artistClicked", flex: 1,
@@ -25,11 +25,11 @@ enyo.kind({
                             }
                         ]
                     },
-                    { name: "preferences", kind: "App.Preferences", className: "enyo-bg", lazy: true,
+                    { name: "preferences", kind: "MyLastFM.Preferences", className: "enyo-bg",
                         onReceive: "preferencesReceived", onSave: "preferencesSaved", onCancel: "goBack" },
-                    { name: "artistSearch", kind: "App.ArtistSearch", className: "enyo-bg", lazy: true,
+                    { name: "artistSearch", kind: "MyLastFM.ArtistSearch", className: "enyo-bg", lazy: true,
                         onBack: "goBack" },
-                    { name: "geoEventsSearch", kind: "App.GeoEventsSearch", className: "enyo-bg", lazy: true,
+                    { name: "geoEventsSearch", kind: "MyLastFM.GeoEventsSearch", className: "enyo-bg", lazy: true,
                         onBack: "goBack" }
             ]
         },
@@ -66,10 +66,10 @@ enyo.kind({
         this.$.about.close();
     },
     preferencesReceived: function (inSender, inPreferences) {
-        App.preferences = inPreferences;
+        MyLastFM.preferences = inPreferences;
     },
     preferencesSaved: function (inSender, inPreferences) {
-        App.preferences = inPreferences;
+        MyLastFM.preferences = inPreferences;
         this.$.pane.back();
     },
     goBack: function (inSender, inEvent) {

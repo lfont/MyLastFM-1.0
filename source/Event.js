@@ -1,6 +1,6 @@
 enyo.kind({
-    name: "App.Event",
-    kind: enyo.VFlexBox,
+    name: "MyLastFM.Event",
+    kind: "enyo.VFlexBox",
     events: {
         onLinkClick: "",
         onBack: ""
@@ -9,57 +9,57 @@ enyo.kind({
         eventItem: ""
     },
     components: [
-        { name: "pane", kind: enyo.Pane, flex: 1,
+        { name: "pane", kind: "enyo.Pane", flex: 1,
             components: [
                 { name: "event", className: "enyo-bg", layoutKind: "VFlexLayout",
                     components: [
-                        { kind: enyo.PageHeader,
+                        { kind: "enyo.PageHeader",
                             components: [
-                                { name: "backButton", kind: enyo.Button, content: "Back",
+                                { name: "backButton", kind: "enyo.Button", content: "Back",
                                     onclick: "backClicked" },
                                 { name: "headerText", layoutKind: "HFlexLayout", pack: "center",
-                                    content: "MyLastFM - Event", flex: 1 }
+                                    content: "Event", flex: 1 }
                             ]
                         },
-                        { kind: enyo.Scroller, flex: 1, autoHorizontal: false, horizontal: false,
+                        { kind: "enyo.Scroller", flex: 1, autoHorizontal: false, horizontal: false,
                             components: [
-                                { kind: enyo.HFlexBox, onclick: "venueClicked",
+                                { kind: "enyo.HFlexBox", onclick: "venueClicked",
                                     components: [
-                                        { name: "venueImage", kind: enyo.Image, className: "image" },
-                                        { name: "venueName", kind: enyo.CustomButton, className: "label", flex: 1 }
+                                        { name: "venueImage", kind: "enyo.Image", className: "image" },
+                                        { name: "venueName", kind: "enyo.CustomButton", className: "label", flex: 1 }
                                     ]
                                 },
-                                { kind: enyo.Group, caption: "Artist",
+                                { kind: "enyo.Group", caption: "Artist",
                                   components: [
-                                    { name: "artists", kind: enyo.VirtualRepeater, onSetupRow: "setupArtistRow",
+                                    { name: "artists", kind: "enyo.VirtualRepeater", onSetupRow: "setupArtistRow",
                                       components: [
-                                        { name: "artist", kind: enyo.Item }
+                                        { name: "artist", kind: "enyo.Item" }
                                       ]
                                     }
                                   ]
                                 },
-                                { kind: enyo.RowGroup, caption: "Start Date",
+                                { kind: "enyo.RowGroup", caption: "Start Date",
                                     components: [
                                         { name: "startDate" }
                                     ]
                                 },
-                                { kind: enyo.RowGroup, caption: "Description",
+                                { kind: "enyo.RowGroup", caption: "Description",
                                     components: [
-                                        { name: "description", kind: enyo.HtmlContent,
+                                        { name: "description", kind: "enyo.HtmlContent",
                                             onLinkClick: "doLinkClick" }
                                     ]
                                 },
-                                { kind: enyo.RowGroup, caption: "Website",
+                                { kind: "enyo.RowGroup", caption: "Website",
                                     components: [
-                                        { name: "venueWebsite", kind: enyo.CustomButton,
+                                        { name: "venueWebsite", kind: "enyo.CustomButton",
                                             onclick: "venueWebsiteClicked" }
                                     ]
                                 },
-                                { kind: enyo.RowGroup, caption: "Address",
+                                { kind: "enyo.RowGroup", caption: "Address",
                                     components: [
                                         { components: [
                                                 { name: "venueStreet" },
-                                                { kind: enyo.HFlexBox,
+                                                { kind: "enyo.HFlexBox",
                                                     components: [
                                                         { name: "venuePostalCode" },
                                                         { width: "10px" },
@@ -71,13 +71,13 @@ enyo.kind({
                                         }
                                     ]
                                 },
-                                { caption: "View on Map", kind: enyo.Button,
+                                { caption: "View on Map", kind: "enyo.Button",
                                     onclick: "viewOnMapClicked" }
                             ]
                         }
                     ]
                 },
-                { name: "map", kind: App.Map, onBack: "goBack" }
+                { name: "map", kind: "MyLastFM.Map", onBack: "goBack", lazy: true }
             ]
         }
     ],
@@ -111,8 +111,8 @@ enyo.kind({
       }
     },
     eventItemChanged: function () {
-        var imageURI = App.LastFM.GetDataService.getImageURI(this.eventItem.venue.image, "medium") ||
-            App.LastFM.GetDataService.getImageURI(this.eventItem.image, "medium");
+        var imageURI = MyLastFM.LastFM.JSONService.getImageURI(this.eventItem.venue.image, "medium") ||
+            MyLastFM.LastFM.JSONService.getImageURI(this.eventItem.image, "medium");
 
         this.$.venueImage.setSrc(imageURI);
         this.$.venueName.setCaption(this.eventItem.venue.name);
@@ -141,7 +141,7 @@ enyo.kind({
     },
     viewOnMapClicked: function (inSender, inEvent) {
         var location = this.eventItem.venue.location["geo:point"];
-        this.$.map.setCenter(location["geo:lat"], location["geo:long"]);
         this.$.pane.selectViewByName("map");
+        this.$.map.setCenter(location["geo:lat"], location["geo:long"]);
     }
 });

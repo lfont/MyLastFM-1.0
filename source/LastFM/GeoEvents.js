@@ -1,6 +1,6 @@
 enyo.kind({
-    name: "App.LastFM.GeoEvents",
-    kind: enyo.Component,
+    name: "MyLastFM.LastFM.GeoEvents",
+    kind: "enyo.Component",
     events: {
         onData: "",
         onNoData: ""
@@ -9,7 +9,7 @@ enyo.kind({
         scrim: ""
     },
     components: [
-        { name: "getGeoEvents", kind: App.LastFM.GetDataService, methodName: "geo.getevents",
+        { name: "getGeoEvents", kind: "MyLastFM.LastFM.JSONService", methodName: "geo.getevents",
             onSuccess: "gotGeoEvents", onFailure: "gotGeoEventsFailure" }
     ],
     search: function (latitude, longitude, page) {

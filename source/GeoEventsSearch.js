@@ -4,6 +4,9 @@ enyo.kind({
     events: {
         onBack: ""
     },
+    published: {
+        location: ""
+    },
     components: [
         { name: "pane", kind: "enyo.Pane", flex: 1,
             components: [
@@ -15,7 +18,8 @@ enyo.kind({
                             service: "palm://com.palm.location/",
                             method: "getCurrentPosition",
                             onSuccess: "gotLocation",
-                            onFailure: "locationFailure"
+                            onFailure: "locationFailure",
+                            timeout: 5000
                         },
                         {
                             name: "getRevLocationCall",
@@ -23,7 +27,8 @@ enyo.kind({
                             service: "palm://com.palm.location/",
                             method: "getReverseLocation",
                             onSuccess: "gotRevLocation",
-                            onFailure: "revLocationFailure"
+                            onFailure: "revLocationFailure",
+                            timeout: 5000
                         },
                         { name: "scrim", kind: "MyLastFM.Scrim" },
                         { name: "getGeoEvents", kind: "MyLastFM.LastFM.GeoEvents",
@@ -42,7 +47,7 @@ enyo.kind({
                             components: [
                                 { kind: "enyo.InputBox",
                                     components: [
-                                        { name: "location", kind: "enyo.Input", flex: 1 },
+                                        { name: "locationInput", kind: "enyo.Input", flex: 1 },
                                         { kind: "enyo.Button", caption: "Get Events", onclick: "getEventsClicked" }
                                     ]
                                 }
@@ -85,11 +90,10 @@ enyo.kind({
         this.$.getGeoEvents.setScrim(this.$.scrim);
         this.$.pane.selectViewByName("search");
     },
-    showingChanged: function () {
-        if (!MyLastFM.preferences) return;
-
-        if (this.$.location.getValue() === "") {
-            this.$.location.setValue(MyLastFM.preferences.defaultLocation);
+    locationChanged: function () {
+        var input = this.$.locationInput;
+        if (input.getValue() === "") {
+            input.setValue(this.location);
         }
     },
     goBack: function (inSender, inEvent) {
@@ -101,7 +105,6 @@ enyo.kind({
     locationButtonClicked: function (inSender, inEvent) {
         this.$.scrim.showScrim(true);
         this.$.getLocationCall.call();
-        this.geoEvents = {};
     },
     gotLocation: function (inSender, inResponse) {
         enyo.log("got success from getLocation");
@@ -116,7 +119,7 @@ enyo.kind({
     },
     gotRevLocation: function (inSender, inResponse) {
         enyo.log("got success from getRevLocation");
-        this.$.location.setValue(inResponse.city + ", " + inResponse.country);
+        this.$.locationInput.setValue(inResponse.city + ", " + inResponse.country);
         this.$.scrim.showScrim(false);
     },
     revLocationFailure: function (inSender, inResponse) {
@@ -124,7 +127,7 @@ enyo.kind({
         this.$.scrim.showScrim(false);
     },
     getEventsClicked: function () {
-        var location = this.$.location.getValue();
+        var location = this.$.locationInput.getValue();
         this.$.getGeoEvents.search(location);
         this.geoEvents = {};
         this.page = 1;
@@ -134,7 +137,7 @@ enyo.kind({
         this.geoEvents = inGeoEvents;
         this.geoEvents.events = previousEvents.concat(inGeoEvents.events);
         this.$.message.hide();
-        this.$.location.setValue(inGeoEvents.location);
+        this.$.locationInput.setValue(inGeoEvents.location);
         this.$.list.show();
         this.$.list.render();
     },

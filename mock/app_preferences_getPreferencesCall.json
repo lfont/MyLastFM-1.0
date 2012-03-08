@@ -1,4 +1,5 @@
 {
-	"defaultLocation": "Paris, France",
+    "artistName": "Foster the People",
+	"location": "Paris, France",
 	"returnValue": true
 }

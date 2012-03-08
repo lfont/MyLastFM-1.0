@@ -71,11 +71,17 @@ enyo.kind({
     closeAboutDialogClicked: function (inSender, inEvent) {
         this.$.about.close();
     },
+    setPreferences: function (inPreferences) {
+        this.$.pane.validateView("geoEventsSearch");
+        this.$.geoEventsSearch.setLocation(inPreferences.location);
+        this.$.pane.validateView("artistSearch");
+        this.$.artistSearch.setArtistName(inPreferences.artistName);
+    },
     preferencesReceived: function (inSender, inPreferences) {
-        MyLastFM.preferences = inPreferences;
+        this.setPreferences(inPreferences);
     },
     preferencesSaved: function (inSender, inPreferences) {
-        MyLastFM.preferences = inPreferences;
+        this.setPreferences(inPreferences);
         this.$.pane.back();
     },
     goBack: function (inSender, inEvent) {

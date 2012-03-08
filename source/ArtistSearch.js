@@ -4,6 +4,9 @@ enyo.kind({
     events: {
         onBack: ""
     },
+    published: {
+        artistName: ""
+    },
     components: [
         { name: "pane", kind: "enyo.Pane", flex: 1,
             components: [
@@ -24,7 +27,7 @@ enyo.kind({
                             components: [
                                 { kind: "enyo.InputBox",
                                     components: [
-                                        { name: "artist", kind: "enyo.Input", flex: 1 },
+                                        { name: "artistNameInput", kind: "enyo.Input", flex: 1 },
                                         { kind: "enyo.Button", caption: "Get Artist", onclick: "getArtistClicked" }
                                     ]
                                 }
@@ -38,7 +41,7 @@ enyo.kind({
                                         { kind: "enyo.HFlexBox", onclick: "artistClicked",
                                             components: [
                                                 { name: "artistImage", kind: "enyo.Image", className: "image" },
-                                                { name: "artistName", kind: "enyo.CustomButton", className: "label", flex: 1 }
+                                                { name: "artistNameButton", kind: "enyo.CustomButton", className: "label", flex: 1 }
                                             ]
                                         },
                                         { kind: "enyo.RowGroup", caption: "Bio",
@@ -93,13 +96,19 @@ enyo.kind({
         this.$.getArtist.setScrim(this.$.scrim);
         this.$.pane.selectViewByName("search");
     },
+    artistNameChanged: function () {
+        var input = this.$.artistNameInput;
+        if (input.getValue() === "") {
+            input.setValue(this.artistName);
+        }
+    },
     getArtistClicked: function () {
-        var artistName = this.$.artist.getValue();
+        var artistName = this.$.artistNameInput.getValue();
         this.$.getArtist.search(artistName);
     },
     setupSimilarRow: function (inSender, inIndex) {
         var similars,
-                similar;
+            similar;
 
         if (!this.artist) return;
 
@@ -113,7 +122,7 @@ enyo.kind({
             }
 
             this.$.similarImage.setSrc(MyLastFM.LastFM.JSONService.getImageURI(
-                                                                similar.image, "small"));
+                                       similar.image, "small"));
             this.$.similarName.setContent(similar.name);
             return true;
         }
@@ -148,7 +157,7 @@ enyo.kind({
     gotArtist: function (inSender, inArtist) {
         this.artist = inArtist;
         this.$.artistImage.setSrc(inArtist.getImageURI("medium"));
-        this.$.artistName.setCaption(inArtist.name);
+        this.$.artistNameButton.setCaption(inArtist.name);
         this.$.artistBio.setContent(inArtist.bio.summary);
         this.$.similars.render();
         this.$.tags.render();

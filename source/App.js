@@ -39,9 +39,15 @@ enyo.kind({
                 { caption: "About", onclick: "showAboutClicked" }
             ]
         },
-        { name: "about", kind: "enyo.ModalDialog", className: "about",
-            caption: "Loic Fontaine - 2012",
+        { name: "about", kind: "enyo.ModalDialog", className: "about", caption: "MyLastFM",
+            layoutKind: "VFlexLayout", pack: "end", align: "center",
             components: [
+                { layoutKind: "VFlexLayout", pack: "end", align: "center",
+                    components: [
+                        { content: "Loïc Fontaine - 2012" },
+                        { content: "MIT Licensed" }
+                    ]
+                },
                 { kind: "enyo.Button", caption: "Close", onclick: "closeAboutDialogClicked" }
             ]
         }

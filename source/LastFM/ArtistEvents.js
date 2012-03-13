@@ -28,7 +28,7 @@ enyo.kind({
         if (this.scrim) this.scrim.showScrim(false);
         if (!inResponse) return;
 
-        if (inResponse.events.event) {
+        if (enyo.isArray(inResponse.events.event)) {
             attributes = inResponse.events["@attr"];
             result = {
                 totalPages: parseInt(attributes.totalPages, 10),

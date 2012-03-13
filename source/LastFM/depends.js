@@ -1,6 +1,9 @@
 enyo.depends(
 	"JSONService.js",
-	"ArtistInfo.js",
+	"AlbumInfo.js",
+    "AlbumSearch.js",
+    "ArtistInfo.js",
 	"ArtistEvents.js",
+    "ArtistTopAlbums.js",
 	"GeoEvents.js"
 );

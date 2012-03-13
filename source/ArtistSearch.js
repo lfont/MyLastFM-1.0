@@ -8,84 +8,192 @@ enyo.kind({
         artistName: ""
     },
     components: [
-        { name: "pane", kind: "enyo.Pane", flex: 1,
+        {
+            name: "pane",
+            kind: "enyo.Pane",
+            flex: 1,
             components: [
-                { name: "search", className: "enyo-bg", layoutKind: "VFlexLayout",
+                {
+                    name: "search",
+                    className: "enyo-bg",
+                    layoutKind: "VFlexLayout",
                     components: [
-                        { name: "scrim", kind: "MyLastFM.Scrim" },
-                        { name: "getArtist", kind: "MyLastFM.LastFM.ArtistInfo",
-                            onData: "gotArtist", onNoData: "noArtist" },
-                        { kind: "enyo.PageHeader",
+                        {
+                            name: "scrim",
+                            kind: "MyLastFM.Scrim"
+                        },
+                        {
+                            name: "getArtist",
+                            kind: "MyLastFM.LastFM.ArtistInfo",
+                            onData: "gotArtist",
+                            onNoData: "noArtist"
+                        },
+                        {
+                            kind: "enyo.PageHeader",
                             components: [
-                                { name: "backButton", kind: "enyo.Button", content: "Back",
-                                    onclick: "backClicked" },
-                                { name: "headerText", layoutKind: "HFlexLayout", pack: "center",
-                                    content: "Artist Search", flex: 1 }
+                                {
+                                    name: "backButton",
+                                    kind: "enyo.Button",
+                                    content: "Back",
+                                    onclick: "backClicked"
+                                },
+                                {
+                                    name: "headerText",
+                                    layoutKind: "HFlexLayout",
+                                    pack: "center",
+                                    content: "Artist Search",
+                                    flex: 1
+                                }
                             ]
                         },
-                        { kind: "enyo.RowGroup", caption: "Artist Name",
+                        {
+                            kind: "enyo.RowGroup",
+                            caption: "Artist Name",
                             components: [
-                                { kind: "enyo.InputBox",
+                                {
+                                    kind: "enyo.InputBox",
                                     components: [
-                                        { name: "artistNameInput", kind: "enyo.Input", flex: 1 },
-                                        { kind: "enyo.Button", caption: "Get Artist", onclick: "getArtistClicked" }
+                                        {
+                                            name: "artistNameInput",
+                                            kind: "enyo.Input",
+                                            flex: 1
+                                        },
+                                        {
+                                            kind: "enyo.Button",
+                                            caption: "Get Artist",
+                                            onclick: "getArtistClicked"
+                                        }
                                     ]
                                 }
                             ]
                         },
-                        { kind: "enyo.Scroller", flex: 1, autoHorizontal: false, horizontal: false,
+                        {
+                            kind: "enyo.Scroller",
+                            flex: 1,
+                            autoHorizontal: false,
+                            horizontal: false,
                             components: [
-                                { name: "message" },
-                                { name: "artistInfo",
+                                {
+                                    name: "message"
+                                },
+                                {
+                                    name: "artistInfo",
                                     components: [
-                                        { kind: "enyo.HFlexBox", onclick: "artistClicked",
+                                        {
+                                            kind: "enyo.HFlexBox",
+                                            onclick: "artistClicked",
                                             components: [
-                                                { name: "artistImage", kind: "enyo.Image", className: "image" },
-                                                { name: "artistNameButton", kind: "enyo.CustomButton", className: "label", flex: 1 }
+                                                {
+                                                    name: "artistImage",
+                                                    kind: "enyo.Image",
+                                                    className: "image"
+                                                },
+                                                {
+                                                    name: "artistNameButton",
+                                                    kind: "enyo.CustomButton",
+                                                    className: "label",
+                                                    flex: 1
+                                                }
                                             ]
                                         },
-                                        { kind: "enyo.RowGroup", caption: "Bio",
+                                        {
+                                            kind: "enyo.RowGroup",
+                                            caption: "Bio",
                                             components: [
-                                                { name: "artistBio", kind: "enyo.HtmlContent",
-                                                    onLinkClick: "artistBioLinkClicked" }
+                                                {
+                                                    name: "artistBio",
+                                                    kind: "enyo.HtmlContent",
+                                                    onLinkClick: "artistBioLinkClicked"
+                                                }
                                             ]
                                         },
-                                        { kind: "enyo.Group", caption: "Similar",
+                                        {
+                                            kind: "enyo.Group",
+                                            caption: "Similar",
                                             components: [
-                                                { name: "similars", kind: "enyo.VirtualRepeater", onSetupRow: "setupSimilarRow",
+                                                {
+                                                    name: "similars",
+                                                    kind: "enyo.VirtualRepeater",
+                                                    onSetupRow: "setupSimilarRow",
                                                     components: [
-                                                        { name: "similar", kind: "enyo.Item", onclick: "similarClicked",
+                                                        {
+                                                            name: "similar",
+                                                            kind: "enyo.Item",
+                                                            onclick: "similarClicked",
                                                             layoutKind: "HFlexLayout",
                                                             components: [
-                                                                { name: "similarImage", kind: "enyo.Image", className: "image" },
-                                                                { name: "similarName", className: "label" }
+                                                                {
+                                                                    name: "similarImage",
+                                                                    kind: "enyo.Image",
+                                                                    className: "image"
+                                                                },
+                                                                {
+                                                                    name: "similarName",
+                                                                    className: "label"
+                                                                }
                                                             ]
                                                         }
                                                     ]
                                                 }
                                             ]
                                         },
-                                        { kind: "enyo.Group", caption: "Tags",
+                                        {
+                                            kind: "enyo.Group",
+                                            caption: "Tags",
                                             components: [
-                                                { name: "tags", kind: "enyo.VirtualRepeater", onSetupRow: "setupTagRow",
+                                                {
+                                                    name: "tags",
+                                                    kind: "enyo.VirtualRepeater",
+                                                    onSetupRow: "setupTagRow",
                                                     components: [
-                                                        { name: "tag", kind: "enyo.Item", onclick: "tagClicked" }
+                                                        {
+                                                            name: "tag",
+                                                            kind: "enyo.Item",
+                                                            onclick: "tagClicked"
+                                                        }
                                                     ]
                                                 }
                                             ]
                                         },
-                                        { name: "getArtistEvents", kind: "enyo.Button", caption: "Events",
-                                            onclick: "getArtistEventsClicked" }
+                                        {
+                                            name: "getArtistEvents",
+                                            kind: "enyo.Button",
+                                            caption: "Events",
+                                            onclick: "getArtistEventsClicked"
+                                        },
+                                        {
+                                            name: "getArtistTopAlbums",
+                                            kind: "enyo.Button",
+                                            caption: "Top Albums",
+                                            onclick: "getArtistTopAlbumsClicked"
+                                        }
                                     ]
                                 }
                             ]
                         }
                     ]
                 },
-                { name: "detail", kind: "MyLastFM.Detail", className: "enyo-bg", lazy: true,
-                    onBack: "goBack" },
-                { name: "events", kind: "MyLastFM.ArtistEvents", className: "enyo-bg", lazy: true,
-                    onBack: "goBack" }
+                {
+                    name: "detail",
+                    kind: "MyLastFM.Detail",
+                    className: "enyo-bg",
+                    lazy: true,
+                    onBack: "goBack"
+                },
+                {
+                    name: "events",
+                    kind: "MyLastFM.ArtistEvents",
+                    className: "enyo-bg",
+                    lazy: true,
+                    onBack: "goBack"
+                },
+                {
+                    name: "topAlbums",
+                    kind: "MyLastFM.ArtistTopAlbums",
+                    className: "enyo-bg",
+                    lazy: true,
+                    onBack: "goBack"
+                }
             ]
         }
     ],
@@ -182,6 +290,10 @@ enyo.kind({
     getArtistEventsClicked: function (inSender, inEvent) {
         this.$.pane.selectViewByName("events");
         this.$.events.setArtistName(this.artist.name);
+    },
+    getArtistTopAlbumsClicked: function (inSender, inEvent) {
+        this.$.pane.selectViewByName("topAlbums");
+        this.$.topAlbums.setArtistName(this.artist.name);
     },
     artistBioLinkClicked: function (inSender, inURL) {
         this.$.pane.selectViewByName("detail");

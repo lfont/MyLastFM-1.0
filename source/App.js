@@ -15,6 +15,12 @@ enyo.kind({
                                             { content: "Artist" }
                                         ]
                                     },
+                                    { kind: "enyo.Button", onclick: "albumsClicked", flex: 1,
+                                        layoutKind: "VFlexLayout", pack: "center",
+                                        components: [
+                                            { content: "Albums" }
+                                        ]
+                                    },
                                     { kind: "enyo.Button", onclick: "eventsClicked", flex: 1,
                                         layoutKind: "VFlexLayout", pack: "center",
                                         components: [
@@ -25,12 +31,35 @@ enyo.kind({
                             }
                         ]
                     },
-                    { name: "preferences", kind: "MyLastFM.Preferences", className: "enyo-bg",
-                        onReceive: "preferencesReceived", onSave: "preferencesSaved", onCancel: "goBack" },
-                    { name: "artistSearch", kind: "MyLastFM.ArtistSearch", className: "enyo-bg", lazy: true,
-                        onBack: "goBack" },
-                    { name: "geoEventsSearch", kind: "MyLastFM.GeoEventsSearch", className: "enyo-bg", lazy: true,
-                        onBack: "goBack" }
+                    {
+                        name: "preferences",
+                        kind: "MyLastFM.Preferences",
+                        className: "enyo-bg",
+                        onReceive: "preferencesReceived",
+                        onSave: "preferencesSaved",
+                        onCancel: "goBack"
+                    },
+                    {
+                        name: "artistSearch",
+                        kind: "MyLastFM.ArtistSearch",
+                        className: "enyo-bg",
+                        lazy: true,
+                        onBack: "goBack"
+                    },
+                    {
+                        name: "albumsSearch",
+                        kind: "MyLastFM.AlbumsSearch",
+                        className: "enyo-bg",
+                        lazy: true,
+                        onBack: "goBack"
+                    },
+                    {
+                        name: "geoEventsSearch",
+                        kind: "MyLastFM.GeoEventsSearch",
+                        className: "enyo-bg",
+                        lazy: true,
+                        onBack: "goBack"
+                    }
             ]
         },
         { kind: "enyo.AppMenu",
@@ -89,6 +118,9 @@ enyo.kind({
     },
     artistClicked: function (inSender, inEvent) {
         this.$.pane.selectViewByName("artistSearch");
+    },
+    albumsClicked: function (inSender, inEvent) {
+        this.$.pane.selectViewByName("albumsSearch");
     },
     eventsClicked: function (inSender, inEvent) {
         this.$.pane.selectViewByName("geoEventsSearch");

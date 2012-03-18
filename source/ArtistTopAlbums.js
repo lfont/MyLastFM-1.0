@@ -24,7 +24,7 @@ enyo.kind({
                         },
                         {
                             name: "getArtistTopAlbums",
-                            kind: "MyLastFM.LastFM.ArtistTopAlbums",
+                            kind: "lastFm.ArtistTopAlbums",
                             onData: "gotArtistTopAlbums",
                             onNoData: "noArtistTopAlbums"
                         },
@@ -143,7 +143,7 @@ enyo.kind({
         a = this.artistTopAlbums.topAlbums[inIndex];
 
         if (a) {
-            imageURI = MyLastFM.LastFM.JSONService.getImageURI(a.image, "medium");
+            imageURI = lastFm.JSONService.getImageURI(a.image, "medium");
             this.$.topAlbumImage.setSrc(imageURI);
             this.$.topAlbumName.setContent(a.name);
             return true;

@@ -31,7 +31,7 @@ enyo.kind({
                             timeout: 5000
                         },
                         { name: "scrim", kind: "MyLastFM.Scrim" },
-                        { name: "getGeoEvents", kind: "MyLastFM.LastFM.GeoEvents",
+                        { name: "getGeoEvents", kind: "lastFm.GeoEvents",
                             onData: "gotGeoEvents", onNoData: "noGeoEvents" },
                         { kind: "enyo.PageHeader",
                             components: [
@@ -155,8 +155,8 @@ enyo.kind({
         e = this.geoEvents.events[inIndex];
 
         if (e) {
-            imageURI = MyLastFM.LastFM.JSONService.getImageURI(e.venue.image, "medium") ||
-                MyLastFM.LastFM.JSONService.getImageURI(e.image, "medium");
+            imageURI = lastFm.JSONService.getImageURI(e.venue.image, "medium") ||
+                lastFm.JSONService.getImageURI(e.image, "medium");
             this.$.venueImage.setSrc(imageURI);
             this.$.artist.setContent(e.artists.headliner);
             this.$.venueName.setContent(e.venue.name);

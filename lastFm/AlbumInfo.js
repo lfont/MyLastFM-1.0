@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "MyLastFM.LastFM.AlbumInfo",
+    name: "lastFm.AlbumInfo",
     kind: "enyo.Component",
     events: {
         onData: "",
@@ -11,7 +11,7 @@ enyo.kind({
     components: [
         {
             name: "getAlbumInfo",
-            kind: "MyLastFM.LastFM.JSONService",
+            kind: "lastFm.JSONService",
             methodName: "album.getInfo",
             onSuccess: "gotAlbumInfo",
             onFailure: "gotAlbumInfoFailure"
@@ -34,7 +34,7 @@ enyo.kind({
         if (inResponse.album) {
             result = inResponse.album;
             result.getImageURI = enyo.bind(this,
-                MyLastFM.LastFM.JSONService.getImageURI,
+                lastFm.JSONService.getImageURI,
                 result.image);
         }
           

@@ -1,7 +1,7 @@
 enyo.depends(
+	"lastFm/",
+	"enyoGoogle/",
 	"css/MyLastFM.css",
-	"$enyo-lib/systemui/",
-	"source/LastFM/",
 	"source/Scrim.js",
 	"source/Preferences.js",
 	"source/Album.js",

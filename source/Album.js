@@ -18,7 +18,7 @@ enyo.kind({
         },
         {
             name: "getAlbum",
-            kind: "MyLastFM.LastFM.AlbumInfo",
+            kind: "lastFm.AlbumInfo",
             onData: "gotAlbum",
             onNoData: "noAlbum"
         },

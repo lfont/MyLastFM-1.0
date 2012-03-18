@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "MyLastFM.LastFM.GeoEvents",
+    name: "lastFm.ArtistEvents",
     kind: "enyo.Component",
     events: {
         onData: "",
@@ -9,53 +9,50 @@ enyo.kind({
         scrim: ""
     },
     components: [
-        { name: "getGeoEvents", kind: "MyLastFM.LastFM.JSONService", methodName: "geo.getevents",
-            onSuccess: "gotGeoEvents", onFailure: "gotGeoEventsFailure" }
-    ],
-    search: function (latitude, longitude, page) {
-        var params = {
-            limit: 20
-        };
-
-        if (typeof(latitude) === "number") {
-            params.latitude = latitude;
-            params.longitude = longitude;
-            params.page = page || 1;
-        } else {
-            params.location = latitude;
-            params.page = longitude || 1;
+        {
+            name: "getArtistEvents",
+            kind: "lastFm.JSONService",
+            methodName: "artist.getevents",
+            onSuccess: "gotArtistEvents",
+            onFailure: "gotArtistEventsFailure"
         }
-
-        this.$.getGeoEvents.call(params);
+    ],
+    search: function (artistName, page) {
+        this.$.getArtistEvents.call({
+            artist: artistName,
+            autocorrect: 1,
+            limit: 20,
+            page: page || 1
+        });
         if (this.scrim) this.scrim.showScrim(true);
     },
-    gotGeoEvents: function (inSender, inResponse) {
+    gotArtistEvents: function (inSender, inResponse) {
         var result,
             attributes;
             
         if (this.scrim) this.scrim.showScrim(false);
         if (!inResponse) return;
-        
+
         if (enyo.isArray(inResponse.events.event)) {
             attributes = inResponse.events["@attr"];
             result = {
                 totalPages: parseInt(attributes.totalPages, 10),
                 page: parseInt(attributes.page, 10),
-                location: attributes.location,
+                artist: attributes.artist,
                 events: inResponse.events.event
             };
 
             this.doData(result);
         } else {
-            this.doNoData("There is no event at this time.");
+            this.doNoData("The artist has not events at this time.");
         }
     },
-    gotGeoEventsFailure: function (inSender, inResponse) {
+    gotArtistEventsFailure: function (inSender, inResponse) {
         if (this.scrim) this.scrim.showScrim(false);
         if (inResponse.error) {
             this.doNoData(inResponse.message);
         } else {
-            this.doNoData("Cannot retrieve events at this time.");
+            this.doNoData("Cannot retrieve artist's events at this time.");
         }
     }
 });

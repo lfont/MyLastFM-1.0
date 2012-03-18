@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "MyLastFM.LastFM.ArtistInfo",
+	name: "lastFm.ArtistInfo",
 	kind: "enyo.Component",
 	events: {
 		onData: "",
@@ -9,8 +9,13 @@ enyo.kind({
         scrim: ""
     },
 	components: [
-		{ name: "getArtistInfo", kind: "MyLastFM.LastFM.JSONService", methodName: "artist.getInfo",
-            onSuccess: "gotArtistInfo", onFailure: "gotArtistInfoFailure" }
+		{
+            name: "getArtistInfo",
+            kind: "lastFm.JSONService",
+            methodName: "artist.getInfo",
+            onSuccess: "gotArtistInfo",
+            onFailure: "gotArtistInfoFailure"
+        }
 	],
 	search: function (artistName) {
 		this.$.getArtistInfo.call({
@@ -28,7 +33,7 @@ enyo.kind({
         if (inResponse.artist) {
             result = inResponse.artist;
             result.getImageURI = enyo.bind(this,
-                MyLastFM.LastFM.JSONService.getImageURI,
+                lastFm.JSONService.getImageURI,
                 result.image);
         }
           

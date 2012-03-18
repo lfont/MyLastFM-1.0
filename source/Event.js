@@ -111,8 +111,8 @@ enyo.kind({
       }
     },
     eventItemChanged: function () {
-        var imageURI = MyLastFM.LastFM.JSONService.getImageURI(this.eventItem.venue.image, "medium") ||
-            MyLastFM.LastFM.JSONService.getImageURI(this.eventItem.image, "medium");
+        var imageURI = lastFm.JSONService.getImageURI(this.eventItem.venue.image, "medium") ||
+            lastFm.JSONService.getImageURI(this.eventItem.image, "medium");
 
         this.$.venueImage.setSrc(imageURI);
         this.$.venueName.setCaption(this.eventItem.venue.name);

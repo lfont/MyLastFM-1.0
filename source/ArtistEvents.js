@@ -13,7 +13,7 @@ enyo.kind({
                 { name: "search", className: "enyo-bg", layoutKind: "VFlexLayout",
                     components: [
                         { name: "scrim", kind: "MyLastFM.Scrim" },
-                        { name: "getArtistEvents", kind: "MyLastFM.LastFM.ArtistEvents",
+                        { name: "getArtistEvents", kind: "lastFm.ArtistEvents",
                             onData: "gotArtistEvents", onNoData: "noArtistEvents" },
                         { kind: "enyo.PageHeader",
                             components: [
@@ -95,8 +95,8 @@ enyo.kind({
         e = this.artistEvents.events[inIndex];
 
         if (e) {
-            imageURI = MyLastFM.LastFM.JSONService.getImageURI(e.venue.image, "medium") ||
-                MyLastFM.LastFM.JSONService.getImageURI(e.image, "medium");
+            imageURI = lastFm.JSONService.getImageURI(e.venue.image, "medium") ||
+                lastFm.JSONService.getImageURI(e.image, "medium");
             this.$.venueImage.setSrc(imageURI);
             this.$.venueName.setContent(e.venue.name);
             this.$.startDate.setContent(e.startDate);

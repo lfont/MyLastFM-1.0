@@ -1,5 +1,5 @@
 enyo.kind({
-    name: "MyLastFM.LastFM.ArtistTopAlbums",
+    name: "lastFm.ArtistTopAlbums",
     kind: "enyo.Component",
     events: {
         onData: "",
@@ -11,7 +11,7 @@ enyo.kind({
     components: [
         {
             name: "getArtistTopAlbums",
-            kind: "MyLastFM.LastFM.JSONService",
+            kind: "lastFm.JSONService",
             methodName: "artist.getTopAlbums",
             onSuccess: "gotArtistTopAlbums",
             onFailure: "gotArtistTopAlbumsFailure"

@@ -20,7 +20,7 @@ enyo.kind({
                         },
                         {
                             name: "getAlbums",
-                            kind: "MyLastFM.LastFM.AlbumSearch",
+                            kind: "lastFm.AlbumSearch",
                             onData: "gotAlbums",
                             onNoData: "noAlbums"
                         },
@@ -165,7 +165,7 @@ enyo.kind({
         a = this.albums.albums[inIndex];
 
         if (a) {
-            imageURI = MyLastFM.LastFM.JSONService.getImageURI(a.image, "medium");
+            imageURI = lastFm.JSONService.getImageURI(a.image, "medium");
             this.$.albumImage.setSrc(imageURI);
             this.$.albumName.setContent(a.name);
             this.$.artistName.setContent(a.artist);

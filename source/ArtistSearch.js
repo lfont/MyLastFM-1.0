@@ -24,7 +24,7 @@ enyo.kind({
                         },
                         {
                             name: "getArtist",
-                            kind: "MyLastFM.LastFM.ArtistInfo",
+                            kind: "lastFm.ArtistInfo",
                             onData: "gotArtist",
                             onNoData: "noArtist"
                         },
@@ -229,7 +229,7 @@ enyo.kind({
                 this.$.similar.addClass("enyo-last");
             }
 
-            this.$.similarImage.setSrc(MyLastFM.LastFM.JSONService.getImageURI(
+            this.$.similarImage.setSrc(lastFm.JSONService.getImageURI(
                                        similar.image, "small"));
             this.$.similarName.setContent(similar.name);
             return true;

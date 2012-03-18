@@ -1,5 +1,5 @@
 enyoGoogle.Map.credentials = "AIzaSyAtDkAgyml1VHrvhvbFNtCqJo7MyH3c-Xk";
-enyoGoogle.Map.forceDegradedMode = false;
+enyoGoogle.Map.degradedMode = true;
 enyoGoogle.Map.sensor = true;
 
 enyo.kind({
